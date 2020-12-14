@@ -10,7 +10,7 @@ import Dashboard from './components/Dashboard/dashboard';
 
 function App() {
   useEffect(() => {
-    document.title = "Home"
+    document.title = "Study Planner"
   }, []);
 
   return (

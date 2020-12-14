@@ -144,12 +144,12 @@ class ProblemFormComponent extends Component {
                     </Form.Group>
                     
                     <Form.Group controlId="note">
-                        <Form.Label><Button variant="outline-info" onClick={e => this.toggleContent('n')}>Note</Button></Form.Label>
+                        <Form.Label><Button id="note" variant="outline-info" onClick={e => this.toggleContent('n')}>Note</Button></Form.Label>
                         {this.noteFormControl(this.props.data.note)}
                     </Form.Group>
         
                     <Form.Group controlId="answer">
-                        <Form.Label> <Button variant="outline-info" onClick={e => this.toggleContent('a')}>Answer</Button> </Form.Label>
+                        <Form.Label> <Button id="answer" variant="outline-info" onClick={e => this.toggleContent('a')}>Answer</Button> </Form.Label>
                         {this.answerFormControl(this.props.data.answer)}
                     </Form.Group>
         
@@ -194,7 +194,7 @@ class ProblemFormComponent extends Component {
 
                     </Form.Row>
         
-                    <Button variant="primary" onClick={this.onSave}>
+                    <Button id="save" variant="primary" onClick={this.onSave}>
                         Save
                     </Button>
         

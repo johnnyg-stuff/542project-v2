@@ -1,10 +1,10 @@
 /*
-This test plan goes through each of the basic CRUD operations in Study Planner.
+This test plan goes through each of the basic CRUD operations in Study Planner, but will find some errors.
 To be used for demonstrations.
-Author: John Gardner
+Author: Michael Lau
 */
 
-describe('Demo Test Suite', () => {
+describe('Demo 2 Test Suite', () => {
     describe('Study Planner load and dashboard', () => {
         it('Should open Study Planner with title text and image', () => {  //check for home page elements
             cy.visit('http://localhost:3000')
@@ -52,7 +52,7 @@ describe('Demo Test Suite', () => {
             cy.get('input[id="category"]').should('be.visible').should('be.enabled')
             cy.get('input[id="sub_category"]').should('be.visible').should('be.enabled')
 
-            //verify the button is labeled "Submit" and is enabled
+
             cy.get('button[type=button]').contains('Submit').as('submitBtn')
             cy.get('@submitBtn').should('be.enabled')
             
@@ -64,29 +64,29 @@ describe('Demo Test Suite', () => {
             cy.contains('Add Problems').click()
 
             //Fill the four text areas
-            cy.get('textarea[id="question"]').type('Car mpg')
-            cy.get('textarea[id="description"]').type('A car got 33 miles per gallon using gasoline that cost $2.95 per gallon. Approximately what was the cost, in dollars, of the gasoline used in driving the car 350 miles?\nA. $10\nB. $20\nC. $30\nD. $40\nE. $50')
-            cy.get('textarea[id="answer"]').type('C. $30')
-            cy.get('textarea[id="note"]').type('The car used 350 over 33 gallons of gasoline, so the cost was (350 over 33) * 2.95 dollars. You can estimate the product (350 over 33) * 2.95 by estimating 350 over 33 a little low, 10, and estimating 2.95 a little high, 3, to get approximately 10 times 3 = 30 dollars. The calculator yields the decimal 31.287... which rounds to 30 dollars. Thus the correct answer is Choice C, $30.')
+            cy.get('textarea[id="question"]').type('Software Testing Definition')
+            cy.get('textarea[id="description"]').type('_______ is the process of evaluating a software system or component during, or at the end of, the development cycle in order to determine whether it satisfies specified requirements.\na. Validation\nb. Evaluation\nc. Verification\nd. Testing')
+            cy.get('textarea[id="answer"]').type('a. Validation')
+            cy.get('textarea[id="note"]').type('Verification is the process of evaluating a software system or component to determine whether the products of a given development phase satisfy the conditions imposed at the start of that phase. Testing can be described as a process used for revealing defects in software, and for establishing that the software has attained a specified degree of quality with respect to selected attributes. A software evaluation is a type of assessment that seeks to determine if software or a combination of software programs is the best possible fit for the needs of a given client.')
 
             //fill in the three inputs
-            cy.get('input[id="importance"]').type('5')
-            cy.get('input[id="category"]').type('GRE')
-            cy.get('input[id="sub_category"]').type('Math')
+            cy.get('input[id="importance"]').type('0')
+            cy.get('input[id="category"]').type('CPSC')
+            cy.get('input[id="sub_category"]').type('Software Testing')
 
             //click submit
             cy.contains('Submit').click()
 
-            //search for "Car" in the Problem column
+            //search for "Software" in the Problem column
             cy.get('div[class="rt-table"]')
             .find('div[class="rt-thead -filters"]')
             .find('div[class="rt-tr"]')
-            .find('div[role="columnheader"]').first().type('Car')
+            .find('div[role="columnheader"]').first().type('Software Testing')
 
             //table query results
             cy.get('div[class="rt-table"]')
             .find('div[class="rt-tbody"]')
-            .find('div[class="rt-tr-group"]').contains('Car').should(($tr) => {
+            .find('div[class="rt-tr-group"]').contains('Software Testing').should(($tr) => {
                 expect($tr.length).to.be.greaterThan(0)
             })
 
@@ -121,7 +121,7 @@ describe('Demo Test Suite', () => {
 
           })
 
-          it('Should filter and open the \'Car MPG\' problem', () => {  //open add problems page and check for elements
+          it('Should filter and open the \'Software Testing Definition\' problem', () => {  //open add problems page and check for elements
             cy.visit('http://localhost:3000')
             cy.contains('Problem Set').click()
             cy.contains('View Problem Sets').click()
@@ -130,9 +130,9 @@ describe('Demo Test Suite', () => {
             cy.get('div[class="rt-table"]')
             .find('div[class="rt-thead -filters"]')
             .find('div[class="rt-tr"]')
-            .find('div[role="columnheader"]').first().type('Car')
+            .find('div[role="columnheader"]').first().type('Software Testing')
 
-            //click View button for "Car MPG" problem
+            //click View button for "Software Testing Definition" problem
             cy.get('div[class="rt-table"]')
             .find('div[class="rt-tbody"]')
             .find('div[class="rt-tr-group"]').first()
@@ -147,8 +147,8 @@ describe('Demo Test Suite', () => {
             cy.get('button[id="note"]').click()
 
             //verify the note and answer text has not changed
-            cy.get('textarea[id="note"]').should('contain', 'The car used 350 over 33 gallons of gasoline, so the cost was (350 over 33) ')
-            cy.get('textarea[id="answer"]').should('contain', 'C. $30')
+            cy.get('textarea[id="note"]').should('contain', 'Verification is the process of evaluating a software system or component to determine whether the products of a given development phase satisfy the conditions imposed at the start of that phase. Testing can be described as a process used for revealing defects in software, and for establishing that the software has attained a specified degree of quality with respect to selected attributes. A software evaluation is a type of assessment that seeks to determine if software or a combination of software programs is the best possible fit for the needs of a given client. ')
+            cy.get('textarea[id="answer"]').should('contain', 'a. Validation')
 
             //click the button again the text should hide
             cy.get('button[id="answer"]').click()
@@ -163,7 +163,7 @@ describe('Demo Test Suite', () => {
     });
 
     describe('Edit a problem', () => {
-        it('Should filter the \'Car MPG\' problem and edit it', () => {
+        it('Should filter the \'Software Testing Definition\' problem and edit it', () => {
             cy.visit('http://localhost:3000')
             cy.contains('Problem Set').click()
             cy.contains('View Problem Sets').click()
@@ -172,29 +172,29 @@ describe('Demo Test Suite', () => {
             cy.get('div[class="rt-table"]')
             .find('div[class="rt-thead -filters"]')
             .find('div[class="rt-tr"]')
-            .find('div[role="columnheader"]').first().type('Car')
+            .find('div[role="columnheader"]').first().type('Software Testing')
 
             //table query results
             cy.get('div[class="rt-table"]')
             .find('div[class="rt-tbody"]')
-            .find('div[class="rt-tr-group"]').contains('Car').should(($tr) => {
+            .find('div[class="rt-tr-group"]').contains('Software Testing').should(($tr) => {
                 expect($tr.length).to.be.greaterThan(0)
             })
 
-            //view the 'Car MPG' entry by clicking the button
+            //view the 'Software Testing Definition' entry by clicking the button
             cy.get('div[class="rt-table"]')
             .find('div[class="rt-tbody"]')
             .find('div[class="rt-tr-group"]').first()
             .find('button[id="view"]').click()
 
             cy.get('textarea[id="question"]').clear()
-            cy.get('textarea[id="question"]').type('Car mpg edit test')
+            cy.get('textarea[id="question"]').type('Software Testing Definition')
             cy.get('button[id="save"]').click()
             
             //table query results
             cy.get('div[class="rt-table"]')
             .find('div[class="rt-tbody"]')
-            .find('div[class="rt-tr-group"]').contains('Car mpg edit test').should(($tr) => {
+            .find('div[class="rt-tr-group"]').contains('Software Testind edit test').should(($tr) => {
                 expect($tr.length).to.equal(1)
             })
 
@@ -203,34 +203,34 @@ describe('Demo Test Suite', () => {
 
 
     describe('Remove a problem', () => {
-        it('Should filter the \'Car MPG\' problem and remove it', () => {
+        it('Should filter the \'Software Testing Definition\' problem and remove it', () => {
             cy.visit('http://localhost:3000')
             cy.contains('Problem Set').click()
             cy.contains('View Problem Sets').click()
 
-            //enter 'Car' into the Problem column
+            //enter 'Software Testing Definition' into the Problem column
             cy.get('div[class="rt-table"]')
             .find('div[class="rt-thead -filters"]')
             .find('div[class="rt-tr"]')
-            .find('div[role="columnheader"]').first().type('Car')
+            .find('div[role="columnheader"]').first().type('Software Testing Definition')
 
             //table query results
             cy.get('div[class="rt-table"]')
             .find('div[class="rt-tbody"]')
-            .find('div[class="rt-tr-group"]').contains('Car').should(($tr) => {
+            .find('div[class="rt-tr-group"]').contains('Software Testing').should(($tr) => {
                 expect($tr.length).to.be.greaterThan(0)
             })
 
-            //remove the 'Car MPG' entry by clicking the remove button
+            //remove the 'Software Testing Definition' entry by clicking the remove button
             cy.get('div[class="rt-table"]')
             .find('div[class="rt-tbody"]')
             .find('div[class="rt-tr-group"]').first()
             .find('button[id="remove"]').click()
 
-            //search again to verify 'Car MPG' has been deleted
+            //search again to verify 'Software Testing Definition' has been deleted
             cy.get('div[class="rt-table"]')
             .find('div[class="rt-tbody"]')
-            .find('div[class="rt-tr-group"]').contains('Car').should(($tr) => {
+            .find('div[class="rt-tr-group"]').contains('Software Testing').should(($tr) => {
                 expect($tr.length).to.equal(0) //assume there was only one result
             })
         })

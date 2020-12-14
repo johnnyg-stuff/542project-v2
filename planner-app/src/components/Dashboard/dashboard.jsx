@@ -9,7 +9,7 @@ class Dashboard extends Component {
                 <Card.Body>
                     <Card.Title>Study Planner</Card.Title>
                     <Card.Text>
-                        Better solution to take notes and help you to study!
+                        Better solution to take notes and help you study!
                     </Card.Text>
                 </Card.Body>
             </Card>

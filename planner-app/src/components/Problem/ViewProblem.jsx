@@ -125,14 +125,14 @@ class ViewProblem extends Component {
                 Cell: props =>{
                   return(
                       <div>
-                        <Button
+                        <Button id="view"
                         onClick={(e)=> {
                             console.log(props);
                             this.viewDetail(props.original._id ? props.original._id.$oid : props.id);
                         }}><FaBookReader /></Button>
 
                         <span style={{"paddingLeft": "20px"}} >
-                            <Button
+                            <Button id="remove"
                             variant="danger"
                             onClick={(e)=> {
                                 this.remove(props.original._id.$oid);
@@ -162,7 +162,7 @@ class ViewProblem extends Component {
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={(e)=>{ this.closeDetailModal() }}>Close</Button>
+                    <Button id="close" variant="secondary" onClick={(e)=>{ this.closeDetailModal() }}>Close</Button>
                 </Modal.Footer>
             </Modal>;
         }
